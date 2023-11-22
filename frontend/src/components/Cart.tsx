@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { FaCartArrowDown } from "react-icons/fa";
+import CartModal from './CartModal';
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
 
+  const [cartModalOpen, setCartModalOpen] = useState(false);
+  function openCartModal() {
+    setCartModalOpen(true);
+  }
+
   return (
-        <>Cart</>
+        <div className="text-primary-orange text-xl flex gap-x-2 items-center">
+            {/* Cart */}
+            <FaCartArrowDown className="cursor-pointer relative" onClick={openCartModal} />
+            <span className="font-bold">0</span> 
+            {cartModalOpen && (
+              <CartModal
+                cartModalOpen={cartModalOpen}
+                onClose={() => setCartModalOpen(false)}
+              />
+            )}
+        </div>
   )
 }
 
