@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaCartArrowDown } from "react-icons/fa";
 import CartModal from './CartModal';
-import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
