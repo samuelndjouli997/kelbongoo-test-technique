@@ -1,9 +1,12 @@
 import React from 'react'
+import Layout from './Layout'
 
 const UserCart = () => {
     
   return (
-    <>UserCart</>
+    <Layout>
+        <h1>UserCart</h1>
+    </Layout>
   )
 }
 
