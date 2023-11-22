@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
+import { useCart, actionTypes } from "../context/CartProvider";
 import { Product } from '../types/types';
 import Button from './Button';
+import axios from 'axios';
 
 
 interface ProductCompoentProps {
@@ -10,14 +12,45 @@ interface ProductCompoentProps {
 
 const ProductComponent = ({product}:ProductCompoentProps) => {
     const [quantity, setQuantity] = useState(1);
+    const { dispatch } = useCart();
 
     const handleQuantityChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setQuantity(parseInt(e.target.value, 10));
     };
 
-
-
+    const handleAddToCart = async () => {
+        try {
+          // Dispatchez l'action ADD_TO_CART avec les détails du produit et la quantité côté client
+          dispatch({
+            type: actionTypes.ADD_TO_CART,
+            payload: {
+              product,
+              quantity,
+            },
+          });
     
+          // Effectuez une requête HTTP pour mettre à jour le panier côté serveur
+          const response = await axios.post(
+            'http://127.0.0.1:8000/cart/update_cart/',
+            `product_id=${product.id}&quantity=${quantity}`,
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': 'your-csrf-token',
+              },
+            }
+          );
+    
+          if (response.status === 200) {
+            console.log('Produit ajouté au panier avec succès côté serveur!');
+          } else {
+            console.error("Erreur lors de l'ajout du produit au panier. Code HTTP:", response.status);
+          }
+        } catch (error) {
+          console.error('Erreur lors de la requête:', error);
+        }
+    };    
+      
 
   return (
         <div className="bg-white p-4 max-w-sm">
@@ -49,8 +82,7 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
             </div>
 
             {/* You can add an "Add to Cart" button or any other actions */}
-            <Button
-                >
+            <Button onClick={handleAddToCart}>
                 Ajouter au panier
             </Button>
         </div>
