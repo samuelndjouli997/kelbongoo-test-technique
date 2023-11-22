@@ -1,13 +1,10 @@
 import React from 'react'
-import Layout from './Layout'
-import Products from './Products'
+import Products from './components/Products'
 
 function App() {
 
   return (
-    <Layout>
-      <Products />
-    </Layout>
+    <Products />
   )
 }
 
