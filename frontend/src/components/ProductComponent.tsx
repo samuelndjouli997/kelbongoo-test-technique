@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Product } from '../types/types';
 import Button from './Button';
 
@@ -11,7 +11,7 @@ interface ProductCompoentProps {
 const ProductComponent = ({product}:ProductCompoentProps) => {
     const [quantity, setQuantity] = useState(1);
 
-    const handleQuantityChange = (e) => {
+    const handleQuantityChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setQuantity(parseInt(e.target.value, 10));
     };
 
