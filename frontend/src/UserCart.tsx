@@ -3,7 +3,7 @@ import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
 import Button from './components/Button';
 import { useCart } from './context/CartProvider';
-import { calculatePriceTTC } from './utils/calculations';
+import { calculatePriceTTC, calculateTotalTTC } from './utils/calculations';
 
 const UserCart = () => {
   const { state } = useCart();
@@ -40,7 +40,7 @@ const UserCart = () => {
         {/* Total */}
         <div className="flex justify-end items-center my-4 space-x-3 text-primary-dark-green font-semibold text-2xl">
           <h2>Total:</h2>
-          <h2>0€</h2>
+          <h2>{calculateTotalTTC(state.cart)} €</h2>
         </div>
 
         <div className="text-center my-4">
