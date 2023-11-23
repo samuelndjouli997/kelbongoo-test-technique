@@ -5,18 +5,22 @@ import Button from './components/Button';
 import { useCart, actionTypes } from './context/CartProvider';
 import { calculatePriceTTC, calculateTotalTTC } from './utils/calculations';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserCart = () => {
     const { state, dispatch } = useCart();
+    const navigate = useNavigate();
 
     const handleCheckout = async () => {
         try {
             // Dispatch l'action CHECKOUT
             dispatch({ type: actionTypes.CHECKOUT });
     
-            // Mettez à jour le stock total des produits avec la quantité commandée
+            // Here we post the products to the cart in the backend
             await updateStockTotal(state.checked_out_products);
 
+            // We redirect the user to the home page
+            navigate('/');
             console.log('Commande passée avec succès!');
         } catch (error) {
             console.error('Erreur lors de la mise à jour du stock:', error);
