@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
 import Button from './components/Button';
@@ -6,9 +5,11 @@ import { useCart, actionTypes } from './context/CartProvider';
 import { calculatePriceTTC, calculateTotalTTC } from './utils/calculations';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { CartItem, ProductItem } from './types/types';
 
 const UserCart = () => {
-    const { state, dispatch } = useCart();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { state, dispatch }:any = useCart();
     const navigate = useNavigate();
 
     const handleCheckout = async () => {
@@ -31,7 +32,7 @@ const UserCart = () => {
         }
     };
 
-    const updateStockTotal = async (products) => {
+    const updateStockTotal = async (products: ProductItem[]) => {
         try {
             await axios.post('http://127.0.0.1:8000/cart/checkout/', {
                 products: products.map(item => ({
@@ -63,7 +64,7 @@ const UserCart = () => {
               </tr>
             </thead>
             <tbody>
-              {state.cart.map((cartItem, index) => (
+              {state.cart.map((cartItem: CartItem, index: number) => (
                 <tr key={index}>
                   <td className="py-2 px-4 border-b">{cartItem?.quantity}</td>
                   <td className="py-2 px-4 border-b">{cartItem.product?.name}</td>
