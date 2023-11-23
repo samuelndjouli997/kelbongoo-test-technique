@@ -3,6 +3,7 @@ import { IoMdClose } from 'react-icons/io';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartProvider';
+import { calculatePriceTTC } from '../utils/calculations';
 
 interface CartModalProps {
   onClose: () => void;
@@ -41,7 +42,7 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
                             {cartItem.product?.name}
                           </p>
                           <p className="text-gray-500 text-xs">
-                            Prix: {cartItem.product?.price_excluding_tax}€
+                            Prix: {calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva).toFixed(2)}€
                           </p>
                           <p className="text-gray-500 text-xs">
                             Quantité: {cartItem?.quantity}

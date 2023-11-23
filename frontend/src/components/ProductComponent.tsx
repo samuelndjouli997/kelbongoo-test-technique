@@ -3,6 +3,7 @@ import { useCart, actionTypes } from "../context/CartProvider";
 import { Product } from '../types/types';
 import Button from './Button';
 import axios from 'axios';
+import { calculatePriceTTC } from '../utils/calculations';
 
 
 interface ProductCompoentProps {
@@ -20,11 +21,15 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
 
     const handleAddToCart = async () => {
         try {
-          // Dispatchez l'action ADD_TO_CART avec les détails du produit et la quantité côté client
+          const priceTTC = calculatePriceTTC(product.price_excluding_tax, product.tva);
+
           dispatch({
             type: actionTypes.ADD_TO_CART,
             payload: {
-              product,
+              product: {
+                ...product,
+                priceTTC,
+              },
               quantity,
             },
           });
@@ -61,7 +66,7 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
             <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
 
             {/* Product Price */}
-            <p className="text-gray-700 mb-2">{product.price_excluding_tax}</p>
+            <p className="text-gray-700 mb-2">{calculatePriceTTC(product.price_excluding_tax, product.tva).toFixed(2)} €</p>
 
             {/* Select Quantity */}
             <div className="flex items-center mb-4">
