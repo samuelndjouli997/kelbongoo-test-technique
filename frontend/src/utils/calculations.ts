@@ -1,21 +1,25 @@
-// Function to calculate the total price including VAT (TTC)
-export const calculatePriceTTC = (priceHT: number, tva: number) => {
+// Function to calculate the total price (TTC) including the tax 
+export const calculatePriceTTC = (priceHT: number, tva: number, quantity: number) => {
     const priceTTC = priceHT * (1 + tva / 100);
-        // We use toFixed() to round the price to 2 decimal places
-        return Number(priceTTC.toFixed(2));
+  
+    // Here we multiply by quantity
+    const totalTTC = priceTTC * quantity;
+  
+    // Here we round the total to 2 decimal places using toFixed
+    return Number(totalTTC.toFixed(2));
   };
 
-// Function to calculate the total TTC for an array of cart items
+// Function to calculate the total TTC for an cart
 export const calculateTotalTTC = (cartItems) => {
     const total = cartItems.reduce((accumulator, cartItem) => {
-      // Calculate the item's TTC price based on quantity
-      const itemPriceTTC = calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva);
-      const itemTotal = itemPriceTTC * cartItem.quantity;
-  
-      // Add the item's total to the overall total
-      return accumulator + itemTotal;
+        // Here we use the calculatePriceTTC function 
+        const itemPriceTTC = calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva, cartItem.quantity);
+        
+        // We add the item's total to the overall total
+        return accumulator + itemPriceTTC;
     }, 0);
-  
-    // Round the total to 2 decimal places using toFixed
+
+    // Here we round the total to 2 decimal places using toFixed
     return Number(total.toFixed(2));
-  };
+};
+  
