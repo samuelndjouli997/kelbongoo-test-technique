@@ -30,7 +30,7 @@ const UserCart = () => {
                 <tr key={index}>
                   <td className="py-2 px-4 border-b">{cartItem?.quantity}</td>
                   <td className="py-2 px-4 border-b">{cartItem.product?.name}</td>
-                  <td className="py-2 px-4 border-b">{calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva)}€</td>
+                  <td className="py-2 px-4 border-b">{calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva, cartItem.quantity)}€</td>
                 </tr>
               ))}
             </tbody>
