@@ -66,7 +66,7 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
             <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
 
             {/* Product Price */}
-            <p className="text-gray-700 mb-2">{calculatePriceTTC(product.price_excluding_tax, product.tva).toFixed(2)} €</p>
+            <p className="text-gray-700 mb-2">{calculatePriceTTC(product.price_excluding_tax, product.tva, quantity).toFixed(2)} €</p>
 
             {/* Select Quantity */}
             <div className="flex items-center mb-4">
