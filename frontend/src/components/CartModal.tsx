@@ -26,7 +26,7 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
             </div>
 
             {state.cart.length === 0 ? (
-              <p className="text-center text-gray-500 text-[16px] mb-6">Le panier est vide 😢.</p>
+              <p className="text-center text-gray-500 text-[16px] mb-6">Votre panier est vide 😢.</p>
             ) : (
               <>
                 <ul className="divide-y divide-gray-300">
