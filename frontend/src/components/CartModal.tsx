@@ -28,7 +28,7 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
               <p className="text-center text-gray-500 text-[16px] mb-6">Le panier est vide 😢.</p>
             ) : (
               <>
-                <ul className="divide-y divide-gray-600">
+                <ul className="divide-y divide-gray-300">
                   {state.cart.map((cartItem, index) => (
                     <li key={index} className="py-2">
                       <div className="flex items-center space-x-4">
@@ -42,7 +42,7 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
                             {cartItem.product?.name}
                           </p>
                           <p className="text-gray-500 text-xs">
-                            Prix: {calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva).toFixed(2)}€
+                            Prix: {calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva, cartItem.quantity).toFixed(2)}€
                           </p>
                           <p className="text-gray-500 text-xs">
                             Quantité: {cartItem?.quantity}
@@ -53,9 +53,9 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
                   ))}
                 </ul>
 
-                <div className="my-4 flex justify-between items-center text-gray-500">
-                  <span className="text-sm font-semibold">Total:</span>
-                  <span className="text-lg font-bold">{calculateTotalTTC(state.cart)} €</span>
+                <div className="my-4 flex justify-between items-center text-gray-500 text-[16px]">
+                  <span className="font-semibold">Total:</span>
+                  <span className="font-bold">{calculateTotalTTC(state.cart)} €</span>
                 </div>
 
                 <Button onClick={onClose}>
