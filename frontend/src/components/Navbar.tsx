@@ -1,4 +1,3 @@
-import React from 'react'
 import LogoKelBonGoo from "../assets/logo-kelbongoo_blanc.svg"
 import Cart from './Cart'
 import { Link } from 'react-router-dom';
