@@ -13,7 +13,6 @@ const Navbar = () => {
                 <img src={LogoKelBonGoo} className="w-[120px] h-auto" alt="Logo" />
             </Link>
         </div>
-        
         {/* Cart */}
         <Cart />
       </div>
