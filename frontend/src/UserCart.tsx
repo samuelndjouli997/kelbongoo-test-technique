@@ -6,6 +6,7 @@ import { calculatePriceTTC, calculateTotalTTC } from './utils/calculations';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CartItem, ProductItem } from './types/types';
+import { toast } from 'react-hot-toast';
 
 const UserCart = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,8 +27,9 @@ const UserCart = () => {
             // We clear the cart
             dispatch({ type: actionTypes.CLEAR_CART });
             
-            console.log('Commande passée avec succès!');
+            toast.success('Commande passée avec succès!');
         } catch (error) {
+            toast.error('Erreur lors de la mise à jour du stock!');
             console.error('Erreur lors de la mise à jour du stock:', error);
         }
     };
