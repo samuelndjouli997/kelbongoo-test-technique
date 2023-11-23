@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaCartArrowDown } from "react-icons/fa";
 import CartModal from './CartModal';
 
