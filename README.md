@@ -1,5 +1,6 @@
-<h1 align=center>E-Commerce Website with Django + React Tailwind CSS</h1>
-<h2 align=center>Kelbongoo - E-commerce App</h2>
+<h1 align=center>Kelbongoo - E-commerce App</h1>
+<h2 align=center>E-Commerce Website with Django + React Tailwind CSS</h2>
+
 ### How to Run 🏃‍♀️
 
 ```shell
