@@ -53,8 +53,8 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
                   ))}
                 </ul>
 
-                <div className="mt-4 flex justify-between items-center">
-                  <span className="text-sm font-semibold text-gray-500">Total:</span>
+                <div className="my-4 flex justify-between items-center text-gray-500">
+                  <span className="text-sm font-semibold">Total:</span>
                   <span className="text-lg font-bold">{calculateTotalTTC(state.cart)} €</span>
                 </div>
 
