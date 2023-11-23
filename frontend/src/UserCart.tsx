@@ -3,6 +3,7 @@ import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
 import Button from './components/Button';
 import { useCart } from './context/CartProvider';
+import { calculatePriceTTC } from './utils/calculations';
 
 const UserCart = () => {
   const { state } = useCart();
@@ -29,7 +30,7 @@ const UserCart = () => {
                 <tr key={index}>
                   <td className="py-2 px-4 border-b">{cartItem?.quantity}</td>
                   <td className="py-2 px-4 border-b">{cartItem.product?.name}</td>
-                  <td className="py-2 px-4 border-b">{cartItem.product?.price_excluding_tax}€</td>
+                  <td className="py-2 px-4 border-b">{calculatePriceTTC(cartItem.product.price_excluding_tax, cartItem.product.tva)}€</td>
                 </tr>
               ))}
             </tbody>
