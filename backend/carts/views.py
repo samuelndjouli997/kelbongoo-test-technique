@@ -31,3 +31,34 @@ def update_cart(request):
         return JsonResponse({'message': 'Cart updated successfully'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
+
+
+@csrf_exempt
+def checkout(request):
+    if request.method == 'POST':
+        # Retrieve the most recent cart that is not checked out
+        cart = Cart.objects.filter(checked_out=False).last()
+
+        # If the cart exists and is not already checked out, mark it as checked out
+        if cart:
+            cart.checked_out = True
+            cart.save()
+
+            # Get the items associated with this cart
+            items = Item.objects.filter(cart=cart)
+
+            # Update the total stock of products
+            for item in items:
+                product = item.product
+                product.max_available_stock -= item.quantity
+                product.save()
+
+            # Delete the cart and its associated items
+            cart.delete()
+            items.delete()
+
+            return JsonResponse({'message': 'Checkout successful'})
+        else:
+            return JsonResponse({'error': 'No available cart to check out'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
