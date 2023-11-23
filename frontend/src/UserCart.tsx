@@ -39,8 +39,8 @@ const UserCart = () => {
 
         {/* Total */}
         <div className="flex justify-end items-center my-4 space-x-3 text-primary-dark-green font-semibold text-2xl">
-          <h2>Total:</h2>
-          <h2>{calculateTotalTTC(state.cart)} €</h2>
+          <p>Total:</p>
+          <p>{calculateTotalTTC(state.cart)} €</p>
         </div>
 
         <div className="text-center my-4">
