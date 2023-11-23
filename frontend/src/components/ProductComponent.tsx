@@ -63,7 +63,7 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
 
   return (
         <div className={"bg-white p-4 max-w-sm"}>
-        {/* Product Image */}
+            {/* Product Image */}
             <img
             src={product.image}
             alt="test"
