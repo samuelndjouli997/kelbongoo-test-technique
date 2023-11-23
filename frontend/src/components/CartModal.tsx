@@ -1,9 +1,9 @@
-import React from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartProvider';
 import { calculatePriceTTC, calculateTotalTTC } from '../utils/calculations';
+import { CartItem } from '../types/types';
 
 interface CartModalProps {
   onClose: () => void;
@@ -11,7 +11,8 @@ interface CartModalProps {
 }
 
 const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
-  const { state } = useCart();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { state }:any = useCart();
 
   return (
     <>
@@ -29,7 +30,7 @@ const CartModal = ({ onClose, cartModalOpen }: CartModalProps) => {
             ) : (
               <>
                 <ul className="divide-y divide-gray-300">
-                  {state.cart.map((cartItem, index) => (
+                  {state.cart.map((cartItem: CartItem, index: number) => (
                     <li key={index} className="py-2">
                       <div className="flex items-center space-x-4">
                         <img
