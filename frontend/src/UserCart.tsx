@@ -2,11 +2,40 @@ import React from 'react';
 import Layout from './Layout';
 import { FaShoppingCart } from 'react-icons/fa';
 import Button from './components/Button';
-import { useCart } from './context/CartProvider';
+import { useCart, actionTypes } from './context/CartProvider';
 import { calculatePriceTTC, calculateTotalTTC } from './utils/calculations';
+import axios from 'axios';
 
 const UserCart = () => {
-  const { state } = useCart();
+    const { state, dispatch } = useCart();
+
+    const handleCheckout = async () => {
+        try {
+            // Dispatch l'action CHECKOUT
+            dispatch({ type: actionTypes.CHECKOUT });
+    
+            // Mettez à jour le stock total des produits avec la quantité commandée
+            await updateStockTotal(state.checked_out_products);
+
+            console.log('Commande passée avec succès!');
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour du stock:', error);
+        }
+    };
+
+    const updateStockTotal = async (products) => {
+        try {
+            await axios.post('http://127.0.0.1:8000/cart/checkout/', {
+                products: products.map(item => ({
+                    product_id: item.product.id,
+                    quantity: item.quantity,
+                })),
+            });
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour du stock:', error);
+        }
+    };
+
 
   return (
     <Layout>
@@ -44,7 +73,7 @@ const UserCart = () => {
         </div>
 
         <div className="text-center my-4">
-          <Button>
+          <Button onClick={handleCheckout}>
             Commander
           </Button>
         </div>
