@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useCart, actionTypes } from "../context/CartProvider";
 import { Product } from '../types/types';
 import Button from './Button';
@@ -13,7 +13,8 @@ interface ProductCompoentProps {
 
 const ProductComponent = ({product}:ProductCompoentProps) => {
     const [quantity, setQuantity] = useState(1);
-    const { dispatch } = useCart();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { dispatch }:any = useCart();
 
     const handleQuantityChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setQuantity(parseInt(e.target.value, 10));
