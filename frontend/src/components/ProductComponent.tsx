@@ -4,6 +4,7 @@ import { Product } from '../types/types';
 import Button from './Button';
 import axios from 'axios';
 import { calculatePriceTTC } from '../utils/calculations';
+import { toast } from 'react-hot-toast';
 
 
 interface ProductCompoentProps {
@@ -49,12 +50,12 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
           );
     
           if (response.status === 200) {
-            console.log('Produit ajouté au panier avec succès côté serveur!');
+            toast.success('Produit ajouté au panier avec succès!');
           } else {
-            console.error("Erreur lors de l'ajout du produit au panier. Code HTTP:", response.status);
+            toast.error('Erreur lors de l\'ajout du produit au panier!');
           }
         } catch (error) {
-          console.error('Erreur lors de la requête:', error);
+          toast.error(`Erreur lors de l'ajout du produit au panier!', ${error}`);
         }
     };    
       
