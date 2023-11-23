@@ -33,8 +33,16 @@ npm i
 npm run dev
 ```
 ### 📷 Project Screenshots
-![Screenshot 1](./screenshots/screenshot1.png)
-![Screenshot 2](./screenshots/screenshot2.png)
+![Screenshot 1](./screenshots/sc-1.png)
+![Screenshot 2](./screenshots/sc-2.png)
+![Screenshot 3](./screenshots/sc-3.png)
+![Screenshot 4](./screenshots/sc-4.png)
+![Screenshot 5](./screenshots/sc-5.png)
+![Screenshot 6](./screenshots/sc-6.png)
+![Screenshot 7](./screenshots/sc-7.png)
+![Screenshot 8](./screenshots/sc-8.png)
+![Screenshot 9](./screenshots/sc-9.png)
+![Screenshot 10](./screenshots/sc-10.png)
 
 ### 🚀 Project Features
 
