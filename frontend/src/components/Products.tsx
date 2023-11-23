@@ -19,7 +19,9 @@ const Products = () => {
   }, []);
 
     return (
-        <div className="mx-auto grid lg:grid-cols-4 lg:gap-y-3 lg:gap-x-1 shadow-md mb-4 lg:px-12 lg:py-20">
+      <div className="lg:px-12 lg:py-16 shadow-md">
+        <h2 className="text-primary-green text-3xl text-center font-semibold mb-8">Produits du moment 🥦</h2>
+        <div className="mx-auto grid lg:grid-cols-4 lg:gap-y-3 lg:gap-x-1 mb-4">
             {
               products.map((product:Product) => (
                   <ProductComponent
@@ -29,6 +31,8 @@ const Products = () => {
               ))
             }
         </div>
+      </div>
+        
       );
 }
 
