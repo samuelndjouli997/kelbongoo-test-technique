@@ -1,23 +1,24 @@
-// CartContext.js
 import React, { createContext, useContext, useReducer } from 'react';
 
 interface CartProviderProps {
     children: React.ReactNode;
     }
 
-// Initial state du panier
+// Initial state of cart
 const initialState = {
     cart: [],
+    checked_out: false,
+    checked_out_products: [], 
   };
 
-// Actions possibles sur le panier
+// Action types on cart
 const actionTypes = {
   ADD_TO_CART: 'ADD_TO_CART',
-  REMOVE_FROM_CART: 'REMOVE_FROM_CART',
-  // Ajoutez d'autres actions si nécessaire, comme REMOVE_FROM_CART, UPDATE_QUANTITY, etc.
+  CHECKOUT: 'CHECKOUT',
+  CLEAR_CART: 'CLEAR_CART',
 };
 
-// Fonction réductrice pour mettre à jour l'état du panier
+// Reducer function to handle actions on cart
 const cartReducer = (state, action) => {
     switch (action.type) {
       case actionTypes.ADD_TO_CART:
@@ -25,42 +26,38 @@ const cartReducer = (state, action) => {
           ...state,
           cart: [...state.cart, action.payload],
         };
-        case actionTypes.REMOVE_FROM_CART: // Case to handle item removal
+        case actionTypes.CHECKOUT:
         return {
-          ...state,
-          cart: state.cart.filter(item => item.id !== action.payload),
+            ...state,
+            checked_out: true,
+            checked_out_products: state.cart,
         };
-      // Handle other cases as needed
+        case actionTypes.CLEAR_CART:
+        return {
+            ...state,
+            cart: [],
+        };
       default:
         return state;
     }
   };
 
-// Créez le contexte avec initialState comme valeur par défaut
+// Here we create the context
 const CartContext = createContext(initialState);
 
-// Créez le fournisseur de contexte
+// Here we create the provider
 const CartProvider = ({ children }: CartProviderProps) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-
-  const removeFromCart = (productId: number) => {
-    dispatch({
-      type: actionTypes.REMOVE_FROM_CART,
-      payload: productId,
-    });
-  };
-
-
-      
+   
 
   return (
-    <CartContext.Provider value={{ state, dispatch, removeFromCart }}>
+    <CartContext.Provider value={{ state, dispatch }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// Fonction utilitaire pour utiliser le contexte
+// Here we create the hook to use the context
 const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
