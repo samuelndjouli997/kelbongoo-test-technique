@@ -21,6 +21,10 @@ const UserCart = () => {
 
             // We redirect the user to the home page
             navigate('/');
+
+            // We clear the cart
+            dispatch({ type: actionTypes.CLEAR_CART });
+            
             console.log('Commande passée avec succès!');
         } catch (error) {
             console.error('Erreur lors de la mise à jour du stock:', error);
