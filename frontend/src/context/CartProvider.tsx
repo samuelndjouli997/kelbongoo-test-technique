@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
+import { CartAction, CartState } from '../types/types';
 
 interface CartProviderProps {
     children: React.ReactNode;
@@ -19,7 +20,7 @@ const actionTypes = {
 };
 
 // Reducer function to handle actions on cart
-const cartReducer = (state, action) => {
+const cartReducer = (state: CartState, action: CartAction) => {
     switch (action.type) {
       case actionTypes.ADD_TO_CART:
         return {
@@ -51,7 +52,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
    
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state , dispatch }}>
       {children}
     </CartContext.Provider>
   );
