@@ -1,6 +1,10 @@
 // CartContext.js
 import React, { createContext, useContext, useReducer } from 'react';
 
+interface CartProviderProps {
+    children: React.ReactNode;
+    }
+
 // Initial state du panier
 const initialState = {
     cart: [],
@@ -36,10 +40,10 @@ const cartReducer = (state, action) => {
 const CartContext = createContext(initialState);
 
 // Créez le fournisseur de contexte
-const CartProvider = ({ children }) => {
+const CartProvider = ({ children }: CartProviderProps) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (productId: number) => {
     dispatch({
       type: actionTypes.REMOVE_FROM_CART,
       payload: productId,
