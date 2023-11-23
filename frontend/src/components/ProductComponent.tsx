@@ -14,6 +14,7 @@ interface ProductCompoentProps {
 
 const ProductComponent = ({product}:ProductCompoentProps) => {
     const [quantity, setQuantity] = useState(1);
+    const isOutOfStock = product.max_available_stock === 0;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { dispatch }:any = useCart();
 
@@ -61,9 +62,13 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
       
 
   return (
-        <div className="bg-white p-4 max-w-sm">
-            {/* Product Image */}
-            <img src={product.image} alt="test" className="max-w-[230px] h-auto object-cover mb-4 rounded-lg" />
+        <div className={"bg-white p-4 max-w-sm"}>
+        {/* Product Image */}
+            <img
+            src={product.image}
+            alt="test"
+            className={`max-w-[230px] h-auto object-cover mb-4 rounded-lg ${isOutOfStock ? 'grayscale' : ''}`}
+            />
 
             {/* Product Name */}
             <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
@@ -80,6 +85,7 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
                     value={quantity}
                     onChange={handleQuantityChange}
                     className="border rounded-md p-2"
+                    disabled={isOutOfStock}
                 >
                     {[...Array(product.max_available_stock).keys()].map((index) => (
                         <option key={index + 1} value={index + 1}>
@@ -88,10 +94,15 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
                     ))}
                 </select>
             </div>
+            {
+                isOutOfStock ? (
+                    <p className="text-red-500 text-[16px] mt-6">Le produit est en rupture de stock. ❌</p>
+                ) : <Button onClick={handleAddToCart}>
+                        Ajouter au panier
+                    </Button>
+            }
 
-            <Button onClick={handleAddToCart}>
-                Ajouter au panier
-            </Button>
+            
         </div>
   )
 }
