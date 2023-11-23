@@ -20,9 +20,9 @@ const UserCart = () => {
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b">Quantité</th>
-                <th className="py-2 px-4 border-b">Produit</th>
-                <th className="py-2 px-4 border-b">Prix</th>
+                <th className="py-2 px-4 border-b text-left">Quantité</th>
+                <th className="py-2 px-4 border-b text-left">Produit</th>
+                <th className="py-2 px-4 border-b text-left">Prix</th>
               </tr>
             </thead>
             <tbody>
