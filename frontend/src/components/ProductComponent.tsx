@@ -21,11 +21,12 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
 
     const handleAddToCart = async () => {
         try {
-          const priceTTC = calculatePriceTTC(product.price_excluding_tax, product.tva);
+          const priceTTC = calculatePriceTTC(product.price_excluding_tax, product.tva, quantity);
 
           dispatch({
             type: actionTypes.ADD_TO_CART,
             payload: {
+              id: product.id, 
               product: {
                 ...product,
                 priceTTC,
@@ -34,7 +35,7 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
             },
           });
     
-          // Effectuez une requête HTTP pour mettre à jour le panier côté serveur
+          // Here we post the product to the cart in the backend
           const response = await axios.post(
             'http://127.0.0.1:8000/cart/update_cart/',
             `product_id=${product.id}&quantity=${quantity}`,
@@ -86,7 +87,6 @@ const ProductComponent = ({product}:ProductCompoentProps) => {
                 </select>
             </div>
 
-            {/* You can add an "Add to Cart" button or any other actions */}
             <Button onClick={handleAddToCart}>
                 Ajouter au panier
             </Button>
